@@ -1,0 +1,173 @@
+                   RESİMLERDE İŞLEM 
+#cv2.imread("")
+=matrisleri değişkene atma
+*resim=cv2.imread("resim.jpg") 
+
+#cv2.imshow("açılan pencere adı",değişkenin ismi)
+=resmi görme
+*cv2.imshow("uzay",resim)
+
+#cv2.waitKey(herhangi bir tuş)
+=açılan resmi kapatma
+*cv2.waitKey(0)
+
+#cv2.destroAllWindows()
+=açılan tüm resimleri kapatır
+*cv2.destroyAllWindows
+
+#cv2.copyMakeBorder(değişken.üstsınır,alt,sağ,sol,cv2.BORDER_REFLECT)
+=copymakeborder neyin sınırlarını belirlemek için
+=borderreflect belirlenen sınırları yansıtmak için
+=BORDER_REPLICATE belirlenen sınırları tekrarlamak için
+=BORDER_WRAP belirlenen sınırları çoğaltmak için
+=BORDER_CONSTANT belirlenen sınırları çerçeve içine alır
+=BORDER_CONSTANT,value=(rgb değerleri) çerçeve rengi
+
+#cv2.rectangle(değişken,(sol üst köşe x,y),(sağ alt köşe x,y),[rgb değerleri çerçeve renk],kalınlık)
+=belilenen köşe kordinatları çerçeveye alır
+*cv2.rectangle(resim,(200,10),(250,40),[0,0,255],1)
+
+#cv2.add(değişken1,değişken2)
+=iki resmi üst üste yerleştirir
+*toplam=cv2.add(resim,resim1)
+cv2.imshow("resim",toplam)
+*cv2.imshow("resim",cv2.add(resim,resim1)
+
+#cv2.addWeighted(değişken1,oranı,değişken2,oranı,0)
+=resimleri üst üste yerleştirirken hangisi daha baskın
+=oran toplamı 1 olmalı
+*cv2.addWeighted(resim,0.7,resim1,0.3,0)
+
+#cv2.cvtColor(değişken,cv2.COLOR_BGR2GRAY)
+=resmi gri yapar işleri hızlandırır
+*resimgri=cv2.cvtColor(resim,cv2.COLOR_BGR2GRAY)
+
+#cv2.pyrUp(değişken)
+=resimi iki kat büyütür
+*ikikat=cv2.pyrUp(resim)
+
+#cv2.pyrDwon(değişken)
+=resmi iki kat küçültüyor
+*cv2.pyrDown(resim)
+
+                KAMERADAN GÖRÜNTÜ ALMA 
+
+#cv.Video.Capture(0)
+=bu komutu değişkene atayınca kamera çalışacağı anlamına geliyor
+=0 sistem kamerası
+=1 usb ile bağlanan sistem kamerası
+=2 seçili video
+*kamera=cv2.VideoCapture(0)
+
+#ret,goruntu=kamera.read()
+=kamerayı çalıştıran komutu kamera değişkenine atadıktan sonra 
+gelen görüntü read ile goruntu değişkenine aktarılıyor
+=ret ise kameranın çalışıp çalışmadığını kontrol ediyor
+*ret,goruntu=kamera.read()
+
+NOT=read belirlenen saniyede çekilen görüntüyü değişkene atar
+
+#cv.waitKey()
+=parantez içine kaç milisaniyede görüntü çekmesini yazabiliriz
+*cv.waitKey(30) #30 milisaniyede bir foto çek
+
+#0xff=='belirlenen tuş'
+=tuşa basılınca kamerayı kapatır
+*if cv2.waitKey(30) & 0xFF=='q'
+
+#np.zeros((300,300,3),dtype="uint8")
+=kendi matrisimizi oluşturuyoruz
+
+#cv.line(değişken,(sol üst köşe),(sağ alt köşe),(rgb değeri),kalınlık)
+=çizgi çekmek için
+*cv.line(resim,(0,0),(100,100),(0,0,255),3)
+
+#cv.circle(resim,(merkez konum),yarıçap,(rgb değeri),kalınlık)
+=daire çizmek için
+*cv.circle(resim,(150,150),25,(0,255,0),2)
+
+#cv.putText(değişken,"yazımız",(başlangıç konum),cv.FONT_HERSHEY_COMPLEX,büyüklük,(rgb değeri),kalınlık)
+=yaptığımız alanda yazı yazmak için
+*cv.putText(resim,"tunahan",(100,200),cv.FONT_HERSHEY_COMPLEX,1,(255,0,0),1)
+
+#cv.FONT_HERSHEY_COMPLEX
+=yazımızın özellikleri
+
+#cv2.dilate(değişken,oluşturulan matris,iterasyon)
+=beyaz olan kısmı daha belirgin hale getiriyor genişleme yapıyor
+*cv2.dilate(image,kernel,iterations=1)
+
+#cv2.erode(değişken,oluşturulan matris,iterasyon)
+=gürültüyü azaltıyor 
+*eros=cv.erode(image,kernel,iterations=1)
+
+NOT:resmi erode ile gürültüyü azaltınca dilate yapmak istenileni ön plana çıkarır
+NOT:iterasyon değeri artarsa yapılan işlem artar
+
+#cv2.morphologyEx(değişken,cv.MORPH_OPEN,kernel)
+=önce erode işlemi sonra dilate işlemi yapar 
+*cv2.morphologyEx(image,cv.MORPH_OPEN,kernel)
+
+#cv2.morphologyEx(değişken,cv.MORPH_CLOSE,kernel)
+=önce dilate işlemi sonra erode işlemi yapar kopukluk birleştirir
+*cv2.morphologyEx(image,cv.MORPH_CLOSE,kernel)
+
+#cv2.morphologyEx(değişken,cv.MORPH_GRADIENT,kernel)
+=dilate işleminden erode işlemini çıkartıyor 
+=eroda olan yerler dilatede yok
+*cv2.morphologyEx(image,cv.MORPH_GRADIENT,kernel)
+
+#cv2.morphologyEx(değişken,cv.MORPH_TOPHAT,kernel)
+=orjinal resimden opening işlemi yapılmış resmi çıkartıyor
+=ön plandaki resim kaldırılıyor
+*cv2.morphologyEx(image,cv.MORPH_TOPHAT,kernel)
+
+#cv2.morphologyEx(değişken,cv.MORPH_BLACKHAT,kernel)
+=close işleminden orjinali çıkartıyot
+*cv2.morphologyEx(image,cv.MORPH_BLACKHAT,kernel)
+
+#ret,thresh1=cv.threshold(değişken,eşik değeri ve bu değer altı matrisler 0 olsun,eşik üstü olanlar ne olsun,cv.kullanılacak thresh)
+=gri resimlerde kullanılıyor algılamada işi kolaylaştırıyor
+*ret,thresh1=cv.threshold(image,127,255,cv.THRESH_BINARY)
+
+
+#cv2.adaptiveThreshold(değişken,max değer,\
+			tipi,hangi tresh,kaça,kaçlık)
+=gri resmi daha detaylı belirtir
+*cv2.adaptiveThreshold(image2,255,cv.ADAPTIVE_THRESH_GAUSSIAN_C,\
+                            cv.THRESH_BINARY,11,2)
+
+
+#int(camera.get(cv.CAP_PROP_FRAME_WIDTH))
+#int(camera.get(cv.CAP_PROP_FRAME_HEIGHT))
+=camera değişken get alma komutu genişliklik ve yükseklik
+
+#cv2.VideoWriter_fourcc(*'MP4V')
+=videoyu kaydetme 
+
+#cv2.VideoWriter("kayit.mp4",fourcc,20,(width,height))
+=dosya adı,kaydetme, video gösterilme hızı ,genişlik yükseklik değeri
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

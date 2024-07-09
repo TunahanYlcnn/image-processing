@@ -1,0 +1,22 @@
+*Hava araçlarının takip etmeleri gereken
+devriye rotası İHA’lar tarafından topluluk
+zekası yöntemleri (swarm optimization
+methods) kullanılarak belirlenebilir
+
+*Olayın içinde bulunanların bir süre sonra
+nerede olacaklarını görüntü işleme
+algoritmaları ve hareket ve konum tespiti
+(motion estimation) yöntemleri kullanılarak
+tahmin edilebilir 
+
+*Çalışmada deneysel modelleme için veriler Şekil 2’de verilen blok diyagramı ile elde edilmiştir. Şekil 2’de simülasyon ortamına
+girilen Giriş ve Çıkış verilerinin dışa aktarılması için IDDATA Sink bloğu kullanılmıştır. Bu sayede dışa aktarılan data verisi System
+Identification Toolbox’ına kolay bir şekilde entegre edilecektir
+
+*Bu çalışmada pratik olarak tasarlanan bir İHA için ilk olarak gerçek zamanlı uçuş verilerinden Giriş-Çıkış data kümeleri elde
+edilmiştir. Bu veriler kullanılarak Matlab Simulink ortamında System Identification toolbox’ı ile İHA için matematiksel model elde
+edilmiştir. Elde edilen matematiksel model geliştirilerek insansız hava aracının otonom bir şekilde inişinin gerçekleştirilmesinde
+kullanılabilecek seviyeye getirilmiştir. Elde edilen matematiksel model kullanılarak İHA kontrolü için bir optimal PID denetleyici
+tasarlanmış ve otonom iniş amacıyla başarıyla kullanılmıştır
+
+*görüntü işlemede yolo kullanmak gerekiyor ise gpu kullanılmalı
